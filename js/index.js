@@ -1,100 +1,97 @@
 window.onload = function () {
-  const input = document.querySelector(".inputNumber")
-  const resetButton = document.querySelector(".resetButton")
-  const equalButton = document.querySelector(".equalButton")
-  const addButton = document.querySelector("#addButton")
-  const substractButton = document.querySelector("#substractButton")
-  const multiplicationButton = document.querySelector("#multiplicationButton")
-  const divisionButton = document.querySelector("#divisionButton")
-  const resultValue = document.querySelector("#resultValue")
-  const logInformation = document.querySelector("#logInformation")
+  var input = document.querySelector(".inputNumber");
+  var resetButton = document.querySelector(".resetButton");
+  var equalButton = document.querySelector(".equalButton");
+  var addButton = document.querySelector("#addButton");
+  var substractButton = document.querySelector("#substractButton");
+  var multiplicationButton = document.querySelector("#multiplicationButton");
+  var divisionButton = document.querySelector("#divisionButton");
+  var resultValue = document.querySelector("#resultValue");
+  var logInformation = document.querySelector("#logInformation");
 
-  let result = null
-  let firstnumber = 0
-  let operationLogBuffer = ""
-  let lastOp = null
-
-  function pushInput() {
-    operationLogBuffer += input.value
-
-  }
-
+  let res = null;
+  let operationLog = "";
+  let lastOp = null;
+  
   function commitOperationBuffer() {
-    logInformation.textContent += `\n${operationLogBuffer}`
-    operationLogBuffer = ""
+    logInformation.textContent += `\n${operationLog}`;
+    operationLog = "";
   }
-
+  
   function resetCalculator() {
-    input.value = ""
-    resultValue.value = ""
-    result = null
-    lastOp = null
-    operationLogBuffer = ""
+    input.value = "";
+    resultValue.value = "";
+    res = null;
+    lastOp = null;
+    operationLog = "";
+  }
+  
+  function pushInput() {
+    operationLog += input.value;
   }
 
-  function handleOperation(operationType) {
-    if (input.value == "" && result == null) {
-      return
-    }
-
-    if (result == null) {
-      result = Number(input.value)
-    }
-
-    compute()
-
-    lastOp = operationType
-
-    pushInput()
-
-    operationLogBuffer += " " + operationType
-    input.value = ""
-  }
-
-  function compute() {
+  function handleResult() {
     const numericValue = Number(input.value)
 
     if (lastOp != null) {
       switch (lastOp) {
         case '+':
-          result += numericValue
+          res += numericValue
           break;
         case '-':
-          result -= numericValue
+          res -= numericValue
           break;
         case '*':
-          result *= numericValue
+          res *= numericValue
           break;
         case '/':
-          result /= numericValue
+          res /= numericValue
           break;
       }
     }
   }
 
-  function handleEqualsClicks() {
-    if (lastOp != null) {
-      compute()
-    } else {
-      result = Number(input.value)
+function handleOperation(operationType) {
+    if (input.value == "" && res == null) {
+      return;
     }
 
-    lastOp = null
+    if (res == null) {
+      res = Number(input.value);
+    }
 
-    pushInput()
+    handleResult();
+    lastOp = operationType;
+    pushInput();
 
-    operationLogBuffer += " = " + result
-    commitOperationBuffer()
-    operationLogBuffer += result
-    resultValue.value = result
-    input.value = ""
+    operationLog += " " + `${operationType} `;
+    input.value = "";
   }
 
-  addButton.addEventListener('click', () => handleOperation('+'))
-  substractButton.addEventListener('click', () => handleOperation('-'))
-  multiplicationButton.addEventListener('click', () => handleOperation('*'))
-  divisionButton.addEventListener('click', () => handleOperation('/'))
-  resetButton.addEventListener('click', resetCalculator)
-  equalButton.addEventListener('click', handleEqualsClicks)
+  function handleEqual() {
+    if (lastOp != null) {
+      handleResult();
+    } else {
+      res = Number(input.value);
+    }
 
+    lastOp = null;
+
+    pushInput();
+
+    operationLog += " = " + res;
+    commitOperationBuffer();
+    operationLog += res;
+    resultValue.value = res;
+    input.value = "";
+    operationLog = "";
+    console.log(input.value)
+  }
+
+  addButton.addEventListener('click', () => handleOperation('+'));
+  substractButton.addEventListener('click', () => handleOperation('-'));
+  multiplicationButton.addEventListener('click', () => handleOperation('*'));
+  divisionButton.addEventListener('click', () => handleOperation('/'));
+  resetButton.addEventListener('click', resetCalculator);
+  equalButton.addEventListener('click', handleEqual);
 }
