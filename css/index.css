@@ -1,0 +1,99 @@
+* {
+    box-sizing: border-box;
+}
+
+body{
+     font-size:1.5em;
+     font-family: sans-serif;
+     color: white;
+}
+
+.calculatorContainer{
+    border: 1px solid white;
+    background-color: #605E5E;
+    border-radius: 8px;
+    width : 380px;
+    margin : 0 auto;
+}
+
+.calculatorTitle{
+    color: white;
+    margin: 5px;
+    text-align: center;
+}
+
+.inputNumber{
+    height: 30px;
+    width: 100%;
+    text-align: right;
+    border-radius: 8px;
+    background-color: #E8E6E6;
+    font-size: 1em;
+    padding: 0 5px;
+}
+
+.operators{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.leftContainer{
+    display: flex;
+    flex-direction: column;
+}
+.rightContainer{
+    display: flex;
+    flex-direction: column;
+}
+.upperOperators, .lowerOperators{
+    display: flex;
+    flex-direction: row;
+}
+.upperOperators > span, .lowerOperators > span{
+    width: 50px;
+}
+
+.resetButton, .equalButton, #addButton, #substractButton, #multiplicationButton, #divisionButton{
+    padding: 10px;
+    border: 1px solid white;
+    text-align: center;
+    height: 50px;
+    border-radius: 8px;
+    margin: 5px;
+}
+
+.resetButton:hover, .equalButton:hover, #addButton:hover, #substractButton:hover, #multiplicationButton:hover, #divisionButton:hover{
+    background: #A1E1E4;
+    cursor: pointer;
+    color: #605E5E;
+    border-color: #605E5E;
+}
+
+.results{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 20px;
+}
+
+.display{
+    padding: 5px;
+}
+
+.labelClass{
+    color: white;
+}
+
+#logInformation{
+    padding: 0 10px;
+    background-color: #E8E6E6;
+    font-size: 0.5em;
+    border-radius: 8px;
+    border: 1px solid white;
+    width: 97%;
+    margin: 10px auto;
+    display: block;
+    height: 200px;
+ }
+
